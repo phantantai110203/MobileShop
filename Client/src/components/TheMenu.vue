@@ -1,48 +1,47 @@
 <template>
-    <div style="margin-top: -30px;">
-        <a-switch :checked="theme === 'dark'" checked-children="Dark" un-checked-children="Light"
-            @change="changeTheme" />
-        <br />
-        <br />
-        <a-menu v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys" style="width: 256px" mode="inline"
-            :theme="theme">
-            <template #default>
-                <a-menu-item v-for="item in items" :key="item.key">
-                    <router-link :to="item.path">{{ item.label }}</router-link>
-                </a-menu-item>
-            </template>
-        </a-menu>
-    </div>
+    <a-menu v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys" mode="inline">
+        <a-menu-item key="admin-users">
+            <router-link :to="{ name: 'admin-users' }">
+                <span>
+                    <UserOutlined class="me-1" /> Tài khoản
+                </span>
+            </router-link>
+        </a-menu-item>
+
+        <a-menu-item key="admin-roles">
+            <router-link :to="{ name: 'admin-roles' }">
+                <span>
+                    <TagOutlined class="me-1" /> Vai trò
+                </span>
+            </router-link>
+        </a-menu-item>
+
+        <a-menu-item key="admin-settings">
+            <router-link :to="{ name: 'admin-settings' }">
+                <span>
+                    <SettingOutlined class="me-1"/> Cài đặt </span>
+            </router-link>
+        </a-menu-item>
+    </a-menu>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-
-// Biến phản ứng
-const theme = ref('light'); // Khởi tạo với chủ đề mặc định
-const openKeys = ref([]);
-const selectedKeys = ref([]);
-
-// Mục menu với đường dẫn
-const items = ref([
-    {
-        key: '1',
-        label: 'Tài Khoản',
-        path: 'users', // Đặt đường dẫn tới route
+<script>
+import { UserOutlined, TagOutlined, SettingOutlined } from "@ant-design/icons-vue";
+import { defineComponent } from "vue";
+import { storeToRefs } from "pinia";
+import { useMenu } from "../stores/use-menu.js";
+export default defineComponent({
+    components: {
+        UserOutlined,
+        TagOutlined,
+        SettingOutlined
     },
-    {
-        key: '2',
-        label: 'Vai Trò',
-        path: 'roles', // Đặt đường dẫn tới route
-    },
-]);
+    setup() {
+        const store = useMenu();
 
-// Hàm xử lý thay đổi chủ đề
-const changeTheme = (checked) => {
-    theme.value = checked ? 'dark' : 'light';
-};
+        return {
+            ...storeToRefs(store),
+        };
+    },
+});
 </script>
-
-<style scoped>
-/* Thêm các kiểu CSS scoped ở đây */
-</style>

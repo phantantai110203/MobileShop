@@ -30,9 +30,7 @@
     
 
     >
-    <p>Some contents...</p>
-    <p>Some contents...</p>
-    <p>Some contents...</p>
+    <TheMenu/>
   </a-drawer>
 
   <a-drawer
@@ -47,8 +45,12 @@
   </a-drawer>
 </template>
 <script>
+import TheMenu from './TheMenu.vue';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
+    components: {
+        TheMenu
+    },
     setup() {
         const visible = ref(false);
         const visible_user = ref(false);
