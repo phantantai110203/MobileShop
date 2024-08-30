@@ -16,6 +16,7 @@ class UserController extends Controller
     public function index()
     {
         return User::all();
+
         // $users = User::
         //     join('contacts', 'users.id', '=', 'contacts.user_id')
         //     ->join('orders', 'users.id', '=', 'orders.user_id')

@@ -1,11 +1,20 @@
 <template>
     <a-card title="Tài Khoản" style="width: 100%">
+        <div class="row mb-3">
+            <div class="col-12 d-flex justify-content-end">
+                <a-button type="primary">
+                    <router-link :to="{ name: 'admin-users-create' }">
+                        <font-awesome-icon :icon="['fas', 'plus']" />
+                    </router-link>
+                </a-button>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
-                <a-table :dataSource="users" :columns="columns">
-                    <template #bodyCell="{ column , index, record}">
+                <a-table :dataSource="users" :columns="columns" :scroll="{ x: 576 }">
+                    <template #bodyCell="{ column, index, record }">
                         <template v-if="column.key === 'index'">
-                            <span>{{ index+1 }}</span>
+                            <span>{{ index + 1 }}</span>
                         </template>
 
                         <template v-if="column.key === 'role'">
@@ -31,7 +40,6 @@ export default defineComponent({
             {
                 title: '#',
                 key: 'index',
-
             },
             {
                 title: 'Tên Người Dùng',
@@ -42,6 +50,8 @@ export default defineComponent({
                 title: 'Email',
                 dataIndex: 'email',
                 key: 'email',
+
+
             },
             {
                 title: 'Địa chỉ',
@@ -62,7 +72,7 @@ export default defineComponent({
             {
                 title: 'Chức năng',
                 key: 'action',
-
+                fixed: 'right',
             },
         ]
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\FlareClient\Api;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApiPhoneModController;
 
 
 
@@ -20,7 +21,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/user/{$id}', [UserController::class, 'show']);
+
 
 
 
@@ -36,7 +37,12 @@ Route::group(
         // Route::post('/resetpassword', [ApiLoginController::class, 'resetPassword']);
         Route::get('/users', [UserController::class, 'index']);
         Route::get('/user/{id}', [UserController::class, 'show']);
+
+        
         Route::get('/brand', [ApiBrandController::class, 'index']);
+        Route::get('/phonemod', [ApiPhoneModController::class, 'index']);
+        Route::get('/phonemod/{id}', [ApiPhoneModController::class, 'show']);
+        Route::get('/search', [ApiPhoneModController::class, 'search']);
     }
 );
 //Bắt buộc đăng nhập (trong request có kèm token hợp lệ)

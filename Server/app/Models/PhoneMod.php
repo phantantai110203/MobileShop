@@ -10,6 +10,7 @@ class PhoneMod extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $table = 'phonemods';
     protected $guarded = [];
     // khóa ngoại
     public function Brands()
@@ -40,4 +41,5 @@ class PhoneMod extends Model
     {
         return $this->hasMany(SlideShow::class);
     }
+
 }
