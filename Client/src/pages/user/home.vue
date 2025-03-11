@@ -31,14 +31,14 @@
         </button>
     </div>
 
-    <div class="container mb-5">
+    <div style="background-color: #f9415c; border-radius: 20px;" class="container mb-5">
         <div v-if="!isSearching">
 
-            <div class="row">
+            <div class="row" style="padding: 30px;">
 
-                <div v-for="phone in phonemod" :key="phone.id" class="col-md-2">
+                <div v-for="phone in phonemod" :key="phone.id" class="col-md-2 mb-4">
                     <div class="card mb-4">
-                        <router-link :to="{ name: 'user-detail' }" class="no-underline">
+                        <router-link :to="{ name: 'user-detail', params: { id: phone.id } }" class="no-underline">
                             <div class="item-label">
                                 <span class="lb-tragop">Trả góp 0%</span>
                             </div>
@@ -56,8 +56,10 @@
 
         </div>
         <!-- Hiển thị kết quả tìm kiếm -->
+
         <div v-else>
-            <div class="row">
+
+            <div class="row" style="padding: 30px;">
                 <h6>Sản phẩm tìm kiếm được <b>{{ searchResultsCount }}</b></h6>
                 <div v-for="result in searchResults" :key="result.id" class="col-md-2">
                     <div class="card mb-4">

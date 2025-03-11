@@ -6,7 +6,7 @@
                     <img src="/public/img/logo1.png" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form>
+                    <form @submit.prevent="login">
                         <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                             <p class="lead fw-normal mb-0 me-3">Đăng nhập bằng</p>
                             <button type="button" data-mdb-button-init data-mdb-ripple-init
@@ -31,15 +31,15 @@
 
                         <!-- Email input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <input type="email" id="form3Example3" class="form-control form-control-lg" placeholder="
-Nhập địa chỉ email hợp lệ" />
+                            <input v-model="email" type="email" id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Nhập địa chỉ email hợp lệ" />
                             <label class="form-label" for="form3Example3">Địa chỉ Email</label>
                         </div>
 
                         <!-- Password input -->
                         <div data-mdb-input-init class="form-outline mb-3">
-                            <input type="password" id="form3Example4" class="form-control form-control-lg"
-                                placeholder="Nhập mật khẩu" />
+                            <input v-model="password" type="password" id="form3Example4"
+                                class="form-control form-control-lg" placeholder="Nhập mật khẩu" />
                             <label class="form-label" for="form3Example4">Mật khẩu</label>
                         </div>
 
@@ -58,11 +58,12 @@ Nhập địa chỉ email hợp lệ" />
                             <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                 class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng
                                 nhập</button>
+                            <p style="color: red;" v-if="errorMessage">{{ errorMessage }}</p>
                             <p class="small fw-bold mt-2 pt-1 mb-0">Bạn chưa có tài khoản?
                                 <router-link :to="{ name: 'register' }">
                                     <a href="#" class="link-danger">Đăng ký</a>
                                 </router-link>
-                            </p>    
+                            </p>
                         </div>
 
                     </form>
@@ -93,3 +94,37 @@ Nhập địa chỉ email hợp lệ" />
     }
 }
 </style>
+<script>
+import axios from 'axios';
+import { mapActions } from 'vuex';
+
+export default {
+    data() {
+        return {
+            email: '',
+            password: '',
+            errorMessage: ''
+        };
+    },
+    methods: {
+        ...mapActions(['setUserId']),
+        async login() {
+            try {
+                const response = await axios.post('http://localhost:8000/api/login', {
+                    email: this.email,
+                    password: this.password
+                });
+
+                if (response.data.status === 'success') {
+                    // Lưu thông tin người dùng và chuyển hướng
+                    
+                    localStorage.setItem('user', JSON.stringify(response.data.user));
+                    this.$router.push('/');
+                }
+            } catch (error) {
+                this.errorMessage = error.response.data.message;
+            }
+        }
+    }
+};
+</script>

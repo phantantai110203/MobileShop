@@ -1,5 +1,6 @@
 import { createPinia } from 'pinia';
 import { createApp } from 'vue'
+import store from './stores/store';
 import router from './router/index'
 import axios from 'axios';
 window.axios = axios;
@@ -46,5 +47,6 @@ app.use(Card);
 app.use(Menu);
 app.use(List);
 app.use(Drawer);
+app.use(store);
 app.mount('#app');
 app.config.globalProperties.$message = message;

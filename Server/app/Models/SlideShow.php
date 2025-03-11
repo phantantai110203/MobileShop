@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SlideShow extends Model
 {
     use HasFactory;
+    protected $table = 'slideshows';
     public function phonemods()
     {
         return $this->belongsTo(PhoneMod::class);

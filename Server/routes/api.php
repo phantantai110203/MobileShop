@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Route;
 use Spatie\FlareClient\Api;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiPhoneModController;
-
-
+use App\Http\Controllers\ApiSlideController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,12 +38,23 @@ Route::group(
         // Route::post('/resetpassword', [ApiLoginController::class, 'resetPassword']);
         Route::get('/users', [UserController::class, 'index']);
         Route::get('/user/{id}', [UserController::class, 'show']);
-
-        
         Route::get('/brand', [ApiBrandController::class, 'index']);
+        Route::get('/slides', [ApiSlideController::class,'index']);
+
+
+        Route::get('/reviews/{phoneModId}', [ReviewController::class, 'index']);
+        Route::post('/reviews/{phoneModId}', [ReviewController::class, 'store']);
+
+
+
+
         Route::get('/phonemod', [ApiPhoneModController::class, 'index']);
         Route::get('/phonemod/{id}', [ApiPhoneModController::class, 'show']);
         Route::get('/search', [ApiPhoneModController::class, 'search']);
+
+
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/logout', [AuthController::class, 'logout']);
     }
 );
 //Bắt buộc đăng nhập (trong request có kèm token hợp lệ)

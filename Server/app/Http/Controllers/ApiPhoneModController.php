@@ -64,7 +64,10 @@ class ApiPhoneModController extends Controller
     public function show($id)
     {
         //
-        return  PhoneMod::findOrFail($id);
+        $phone = PhoneMod::findOrFail($id);
+        $phone->image = asset('storage/phone_image/' . $phone->image);
+        $phone->price = number_format($phone->price, 0, ',', '.');
+        return response()->json($phone);
     }
 
     /**

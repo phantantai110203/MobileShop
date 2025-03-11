@@ -9,6 +9,12 @@ class Review extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $fillable = [
+        'phonemod_id',
+        'user_id',
+        'star',
+        'content'
+    ];
     public function phonemods()
     {
         return $this->belongsTo(PhoneMod::class);

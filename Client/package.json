@@ -17,9 +17,11 @@
     "ant-design-vue": "^4.2.3",
     "axios": "^1.7.3",
     "bootstrap": "^5.3.3",
+    "date-fns": "^3.6.0",
     "pinia": "^2.2.0",
     "vue": "^3.4.29",
-    "vue-router": "^4.4.0"
+    "vue-router": "^4.4.0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",

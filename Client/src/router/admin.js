@@ -14,7 +14,7 @@ const admin = [
         component: () => import("../pages/user/cart.vue")
       },
       {
-        path: "/detail",
+        path: "/detail/:id",
         name: "user-detail",
         component: () => import("../pages/user/detail.vue")
       },

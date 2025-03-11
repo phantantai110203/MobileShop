@@ -3,10 +3,8 @@
         <div class="container-fluid">
             <router-link :to="{ name: 'user-home' }">
                 <a class="navbar-brand" href="#">
-
                     <img src="/public/img/logo1.png" alt="Logo" width="150" height="50"
                         class="d-inline-block align-text-top">
-
                 </a>
             </router-link>
 
@@ -20,7 +18,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <font-awesome-icon :icon="['fas', 'bars']" class="me-1" /> Danh mục
                         </a>
                         <ul class="dropdown-menu">
@@ -51,20 +49,29 @@
                     <a href="#" class="btn btn-danger rounded-pill ms-4 text-dark"><font-awesome-icon
                             :icon="['fas', 'cart-shopping']" class="me-1" />Giỏ hàng</a>
                 </router-link>
-                <router-link :to="{ name: 'login' }">
+                <router-link v-if="!user" :to="{ name: 'login' }">
                     <a class="btn btn-outline-secondary rounded-pill ms-4 text-dark" href="#"><font-awesome-icon
                             :icon="['fas', 'user']" /></a>
                 </router-link>
+                <div v-else class="d-flex align-items-center ms-4">
+                    <span class="me-2">Xin chào, {{ user.name }}</span>
+                
+                </div>
             </div>
         </div>
     </nav>
 </template>
+
 <script>
+import { mapGetters } from 'vuex';
 export default {
     data() {
         return {
             searchQuery: ''
         };
+    },
+    computed: {
+        ...mapGetters(['user'])
     },
     methods: {
         searchProducts() {
